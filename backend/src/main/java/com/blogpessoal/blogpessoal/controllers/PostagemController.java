@@ -39,7 +39,7 @@ public class PostagemController {
 
 	@GetMapping("/titulo/{titulo}")
 	public ResponseEntity<List<Postagem>> findByTitulo(@PathVariable String titulo) {
-		return ResponseEntity.ok().body(service.findByTitulo("primeira postagem teste"));
+		return ResponseEntity.ok().body(service.findByTitulo(titulo));
 	}
 
 	@PostMapping
