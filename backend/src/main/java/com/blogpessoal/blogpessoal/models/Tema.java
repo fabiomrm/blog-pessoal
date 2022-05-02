@@ -1,12 +1,18 @@
 package com.blogpessoal.blogpessoal.models;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "tb_temas")
@@ -19,6 +25,10 @@ public class Tema {
 	@NotBlank
 	@Size(min = 3, max = 255)
 	private String descricao;
+
+	@OneToMany(mappedBy = "tema", cascade = CascadeType.REMOVE)
+	@JsonIgnoreProperties("tema")
+	private List<Postagem> postagem;
 
 	public Tema() {
 
@@ -38,6 +48,14 @@ public class Tema {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public List<Postagem> getPostagem() {
+		return postagem;
+	}
+
+	public void setPostagem(List<Postagem> postagem) {
+		this.postagem = postagem;
 	}
 
 }
