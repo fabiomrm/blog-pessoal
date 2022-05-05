@@ -1,12 +1,18 @@
 package com.blogpessoal.blogpessoal.models;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "tb_usuarios")
@@ -31,6 +37,10 @@ public class Usuario {
 	private String foto;
 
 	private String tipo;
+
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
+	@JsonIgnoreProperties("usuario")
+	private List<Postagem> postagens;
 
 	public Usuario() {
 	}
@@ -81,6 +91,10 @@ public class Usuario {
 
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
+	}
+
+	public List<Postagem> getPostagens() {
+		return postagens;
 	}
 
 }
