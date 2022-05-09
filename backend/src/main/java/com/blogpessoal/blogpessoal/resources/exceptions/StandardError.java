@@ -1,4 +1,4 @@
-package com.blogpessoal.blogpessoal.repositories.exceptions;
+package com.blogpessoal.blogpessoal.resources.exceptions;
 
 import java.time.Instant;
 

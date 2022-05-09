@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.blogpessoal.blogpessoal.models.Postagem;
+import com.blogpessoal.blogpessoal.models.Tema;
 import com.blogpessoal.blogpessoal.repositories.PostagemRepository;
+import com.blogpessoal.blogpessoal.repositories.TemaRepository;
 import com.blogpessoal.blogpessoal.services.exceptions.DatabaseException;
 import com.blogpessoal.blogpessoal.services.exceptions.ResourceNotFoundException;
 
@@ -19,6 +21,9 @@ public class PostagemService {
 
 	@Autowired
 	private PostagemRepository repository;
+
+	@Autowired
+	private TemaRepository temaRepository;
 
 	@Transactional(readOnly = true)
 	public List<Postagem> findAll() {
@@ -43,6 +48,9 @@ public class PostagemService {
 
 	@Transactional
 	public Postagem insert(Postagem entity) {
+		Optional<Tema> obj = temaRepository.findById(entity.getTema().getId());
+		obj.orElseThrow(() -> new ResourceNotFoundException("Tema não encontrado"));
+		
 		entity = repository.save(entity);
 
 		return entity;
