@@ -45,6 +45,19 @@ public class Usuario {
 	public Usuario() {
 	}
 
+	public Usuario(Long id, @NotBlank @Size(min = 3, max = 255) String nome,
+			@NotBlank @Size(min = 3, max = 255) String usuario, @NotBlank @Size(min = 3, max = 255) String senha,
+			String foto, String tipo) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.usuario = usuario;
+		this.senha = senha;
+		this.foto = foto;
+		this.tipo = tipo;
+
+	}
+
 	public Long getId() {
 		return id;
 	}
